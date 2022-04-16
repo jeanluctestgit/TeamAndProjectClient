@@ -8,6 +8,7 @@ import AuthService from "./services/auth.service";
 import Login from "./components/Authentication/login.component";
 import Register from "./components/Authentication/register.component";
 import Home from "./components/Home/home.component";
+import MemberSpace from './components/MemberSpace/member_space.component';
 
 
 class App extends Component {
@@ -84,11 +85,12 @@ class App extends Component {
           )}
         </nav>
 
-        <div className="container mt-3">
+        <div className="" style={{ width : '100%'}}>
           <Switch>
             <Route exact path={["/", "/login"]} component={Login} />
             <Route exact path="/home" component={() => <Home   currentUser={currentUser} />} />
             <Route exact path="/register" component={Register} />
+            <Route path="/member_space" component={() => <MemberSpace />} />
           </Switch>
         </div>
       </div>

@@ -1,0 +1,141 @@
+const tasks = [
+    {
+      _id: 1,
+      title: "First Task",
+      category: "Init",
+      description:
+        "aaaaaaaaaaaaaaaaaaazzzzzzzzzzzzzzzzzzzzzzzzeeeeeeeeeeeeeeeeeeeeeerrrrrrrrrrrrrrrrrrrrrrrttttttttttttttttttyyyyyyyyyy",
+      validation: "",
+      start: new Date().toISOString().split('T')[0],
+      end: new Date(new Date().setDate(new Date().getDate() + 7)).toISOString().split('T')[0],
+      status: "todo",
+      for: ["titi","Foo Bar", "Jean-luc Deshayes"],
+    },
+    {
+      _id: 2,
+      title: "Second Task",
+      category: "Init",
+      description: "",
+      validation: "",
+      start: new Date(new Date().setDate(new Date().getDate() + 4)).toISOString().split('T')[0],
+      end: new Date(new Date().setDate(new Date().getDate() + 12)).toISOString().split('T')[0],
+      status: "doing",
+      for: ["titi","Foo Bar", "Jean-luc Deshayes"],
+    },
+    {
+      _id: 3,
+      title: "Third Task",
+      category: "Init",
+      description: "",
+      validation: "",
+      start: new Date(new Date().setDate(new Date().getDate() + 13)).toISOString().split('T')[0],
+      end: new Date(new Date().setDate(new Date().getDate() + 24)).toISOString().split('T')[0],
+      status: "todo",
+      for: ["Foo Bar", "Jean-luc Deshayes" , "titi"],
+    },
+    {
+      _id: 4,
+      title: "Fourth Task",
+      category: "Dev",
+      description: "",
+      validation: "",
+      start: "",
+      end: "",
+      status: "done",
+      for: ["Foo Bar", "Jean-luc Deshayes"],
+    },
+    {
+      _id: 5,
+      title: "Fifth Task",
+      category: "Dev",
+      description: "zaeterztertzrezetzerz",
+      validation: "",
+      start: "",
+      end: "",
+      status: "doing",
+      for: ["Foo Bar", "Jean-luc Deshayes"],
+    },
+    {
+      _id: 6,
+      title: "Sixth Task",
+      category: "Test",
+      description: "",
+      validation: "",
+      start: "",
+      end: "",
+      status: "todo",
+      for: ["Foo Bar", "Jean-luc Deshayes"],
+    },
+    {
+      _id: 7,
+      title: "Seventh Task",
+      category: "Review",
+      description: "",
+      validation: "",
+      start: "",
+      end: "",
+      status: "doing",
+      for: ["Foo Bar", "Jean-luc Deshayes"],
+    },
+    {
+      _id: 8,
+      title: "Eighth Task",
+      category: "Review",
+      description: "",
+      validation: "",
+      start: "",
+      end: "",
+      status: "done",
+      for: ["Foo Bar", "Jean-luc Deshayes"],
+    },
+    {
+      _id: 9,
+      title: "Ninth Task",
+      category: "Production",
+      description: "",
+      validation: "",
+      start: "",
+      end: "",
+      status: "doing",
+      for: ["Foo Bar", "Jean-luc Deshayes"],
+    },
+    {
+      _id: 10,
+      title: "Tenth Task",
+      category: "Production",
+      description: "",
+      validation: "",
+      start: "",
+      end: "",
+      status: "todo",
+      for: ["Foo Bar", "Jean-luc Deshayes"],
+    },
+  ];
+  
+  let channels = ["Init", "Dev", "Test", "Review", "Production"];
+  
+  let status = ["todo", "doing", "done"];
+  
+  let users = [
+    { _id: 1, name: "toto bar" },
+    { _id: 2, name: "Meddy Seize" },
+    { _id: 3, name: "Foo Bar" },
+    { _id: 4, name: "Jean-luc Deshayes" },
+     {_id: 5, name: "titi" },
+  ];
+  
+  let labelsMap = {
+    Init: "Initialisation",
+    Dev: "Developpement",
+    Test: "Test",
+    Review: "Review",
+    Production: "Production",
+  };
+
+module.exports=  {
+    tasks : tasks,
+    channels : channels,
+    status : status,
+    users : users,
+    labelsMap : labelsMap
+}

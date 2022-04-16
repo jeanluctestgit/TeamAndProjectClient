@@ -1,7 +1,7 @@
 import axios from "axios";
 import authHeader from './auth-header';
 import jwt from 'jwt-decode' // import dependency
-const API_URL = "http://localhost:8081/api/auth/";
+const API_URL = "http://teamsandprojectapi-env.eba-mdhaamar.us-east-1.elasticbeanstalk.com/api/auth/";
 
 class AuthService {
   login(username, password) {

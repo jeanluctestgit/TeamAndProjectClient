@@ -1,7 +1,7 @@
 import axios from 'axios';
 import authHeader from './auth-header';
 
-const API_URL = 'http://localhost:8081/api/projects';
+const API_URL = 'http://teamsandprojectapi-env.eba-mdhaamar.us-east-1.elasticbeanstalk.com/api/projects';
 
 class ProjectService {
   getAllProjects() {
@@ -20,14 +20,14 @@ class ProjectService {
                     return response.data;
                 });
   }
-  updateProject(id,data){
-    return axios.put(API_URL + id, data , { headers: authHeader() })
+  updateProject(data){
+    return axios.put(API_URL + '/' + data.id, data , { headers: authHeader() })
                 .then(response => {
                     return response.data;
                 }); 
   }
-  deleteProject(id){
-    return axios.delete(API_URL + id , { headers: authHeader() });
+  deleteProject(data){
+    return axios.delete(API_URL + '/' + data.id, { headers: authHeader() });
   }
 }
 

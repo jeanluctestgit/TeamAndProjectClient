@@ -32,10 +32,10 @@ export default function Project(props) {
     let [SelectedCollaborator , setSelectedCollaborator] = useState({});
     let [UpdateData,setUpdateData] = useState(false);
 
-    const { isUserLoading, user_error, user_data } = useQuery('fetchUsers', UserServices.getUsers().then(
+    /*const { isUserLoading, user_error, user_data } = useQuery('fetchUsers', UserServices.getUsers().then(
         response => {
             //setUsers(response.data);
-            //setpUsers(response.data);
+            setpUsers(response.data);
             console.log(response.data)
         }
         
@@ -43,7 +43,7 @@ export default function Project(props) {
       retry : false
     })
 
-   /* const { isProjectLoading, project_error, project_data } = useQuery('fetchProjects', ProjectServices.getAllProjects().then(
+    const { isProjectLoading, project_error, project_data } = useQuery('fetchProjects', ProjectServices.getAllProjects().then(
         response => {
             setProjects(response.data);
         }
@@ -99,13 +99,23 @@ export default function Project(props) {
         }
       });
 
-    useEffect(() => {
-      /*UserServices.getUsers().then(
-        response => {
-           // setUsers(response.data);
-            setpUsers(response.data);
-        })*/
-    },[])
+      useEffect(() => {
+        // Met à jour le titre du document via l’API du navigateur
+        UserServices.getUsers().then(
+          response => {
+              //setUsers(response.data);
+              setpUsers(response.data);
+              console.log(response.data)
+          })
+
+          ProjectServices.getAllProjects().then(
+            response => {
+                setProjects(response.data);
+            })
+        
+      },[]);
+
+    
 
     
 
@@ -114,7 +124,8 @@ export default function Project(props) {
         let projectId = id;
         let data = {}
         data.id = id;
-        deleteProject.mutate(data);
+        ProjectServices.deleteProject(data)
+        window.location.reload(false)
       }
     
     const  handleUpdateProject = (e, id) => {
@@ -130,9 +141,9 @@ export default function Project(props) {
         projectId.value = id;
         projectName.value = selProject.name;
         projectDescription.value = selProject.description;
-        setDateStart(new Date(selProject.DateStart));
-        setDateEnd(new Date(selProject.DateEnd));
-        Collaborators = selProject.collaborators.map(c => c.username);
+        setDateStart(new Date(selProject.dateStart));
+        setDateEnd(new Date(selProject.dateEnd));
+        Collaborators = selProject.collaborators.map(c => c);
         setCollaborators(Collaborators);
       }
 
@@ -148,32 +159,38 @@ export default function Project(props) {
       let project_collabs = Collaborators;
       alert(Collaborators);
       let collabs = [];
-      project_collabs.forEach(element => {
+      /*project_collabs.forEach(element => {
         let t = pUsers.filter(u => u.username === element);
         console.log(t)
         collabs = [...collabs , (pUsers.filter(u => u.username === element))[0].id];
-      });
+      });*/
       
-      let project_author = (pUsers.filter(u => u.username === props.currentUser.username))[0].id;
+      /*let project_author = (pUsers.filter(u => u.username === props.currentUser.username))[0].id;
+      alert(project_author)*/
+      alert(JSON.parse(props['currentUser']))
       let data = {}
-      /*if(UpdateData)
-       data.id = project_id;*/
+      if(UpdateData)
+       data.id = project_id;
+      console.log(DateStart);
       data.name = project_name;
       data.description = project_description;
-      data.DateStart = DateStart;
-      data.DateEnd = DateEnd;
-      data.createdBy = project_author;
-      data.collaborators = collabs;
-      /*if(UpdateData)
+      data.dateStart = DateStart;
+      data.dateEnd = DateEnd;
+      data.createdBy = JSON.parse(props['currentUser'])['username'];
+      data.collaborators = Collaborators;
+      if(UpdateData)
       {
-       mutate2.mutate(data);
+        alert('update')
+       //mutate2.mutate(data);
+       ProjectServices.updateProject(data)
        
       }else{
         mutate(data);
-      }*/
+      }
+      window.location.reload(false)
       //mutate(data);
-      console.log('-----> create');
-      ProjectServices.createProject(data);
+     /* alert('-----> create' + JSON.stringify(data));
+      ProjectServices.createProject(data);*/
     }
     const onChangeProjectName = (e) => {
       setProjectName(e.target.value);
@@ -201,6 +218,12 @@ export default function Project(props) {
       setCollaborators(Collaborators);
     }
 
+    const handleSaveProjectProps = (e,p) => {
+      localStorage.setItem("project",JSON.stringify({user: props.currentUser,project : p}));
+    }
+
+
+
     return (
         <div className="container">
             <pre>
@@ -222,12 +245,12 @@ export default function Project(props) {
                <Row>
                  <Col>
                  <Form.Label>Date Start</Form.Label>
-                 <DatePicker selected = {DateStart} name="DateStart" dateFormat="dd/MM/yyyy" onChange={onChangeDateStart}/>
+                 <DatePicker selected = {DateStart ? DateStart : new Date()} name="DateStart" dateFormat="yyyy-MM-dd" onChange={onChangeDateStart}/>
                  
                  </Col>
                  <Col>
                  <Form.Label>Date End</Form.Label>
-                 <DatePicker selected = {DateEnd} name="DateEnd" dateFormat="dd/MM/yyyy" onChange={onChangeDateEnd}/>
+                 <DatePicker selected = {DateEnd ? DateEnd : new Date()} name="DateEnd" dateFormat="yyyy-MM-dd" onChange={onChangeDateEnd}/>
                  </Col>
                </Row>
             </Container>
@@ -322,7 +345,7 @@ export default function Project(props) {
                           user: props.currentUser,
                           project: p
                         }
-                      }} className="btn btn-primary">
+                      }} className="btn btn-primary" onClick={(e) => handleSaveProjectProps(e,p)}>
                         Follow
                       </NavLink>
                       <Button onClick={(e) => handleUpdateProject(e, p.id)}>Update</Button>

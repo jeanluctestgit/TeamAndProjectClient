@@ -1,7 +1,7 @@
 import axios from 'axios';
 import authHeader from './auth-header';
 
-const BASE_URL = "http://localhost:8081/api";
+const BASE_URL = "http://teamsandprojectapi-env.eba-mdhaamar.us-east-1.elasticbeanstalk.com/api";
 
 class UserServices {
     getUsers()
