@@ -265,9 +265,11 @@ class UserKanban extends Component {
       task.end = tname.get("End");
       task.for = this.state.selectedCollab;
       const taskIndex = tasks.indexOf(task);
-      newTasks = update(tasks, {
+      TaskServices.updateTask(JSON.parse(localStorage.getItem("project")).project.id,task)
+      window.location.reload(false)
+      /*newTasks = update(tasks, {
         [taskIndex]: { $set: task },
-      });
+      });*/
     }
 
     console.log(newTasks);
@@ -287,11 +289,7 @@ class UserKanban extends Component {
     return (
       
       <main style={{ fontSize: 12 }}>
-        <pre>
-          {
-            JSON.stringify(JSON.parse(this.props.currentUser))
-          }
-        </pre>
+        
         <section style={classes.board}>
           {status.map((value) => (
             <UserKanbanColumn status={value}>

@@ -103,7 +103,7 @@ export default function Project(props) {
         // Met à jour le titre du document via l’API du navigateur
         UserServices.getUsers().then(
           response => {
-              //setUsers(response.data);
+              setUsers(response.data);
               setpUsers(response.data);
               console.log(response.data)
           })
@@ -111,7 +111,10 @@ export default function Project(props) {
           ProjectServices.getAllProjects().then(
             response => {
                 setProjects(response.data);
+               
             })
+
+          
         
       },[]);
 
@@ -226,12 +229,7 @@ export default function Project(props) {
 
     return (
         <div className="container">
-            <pre>
-                { JSON.stringify(Users)}
-            </pre>
-            <pre>
-                { JSON.stringify(Projects)}
-            </pre>
+            
             <div className="jumbotron">
           <Form id="project_data" onSubmit={handleSaveProject}>
             <Form.Group controlId="exampleForm.ControlInput1">
@@ -321,7 +319,7 @@ export default function Project(props) {
           <tbody>
             {Projects
               .filter(
-                (p) => p.collaborators.filter(c => c.username === props.currentUser.username)
+                (p) => (p.createdBy === JSON.parse(props.currentUser).username)
               )
               .map((p, index) => {
                 return (

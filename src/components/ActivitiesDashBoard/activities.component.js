@@ -32,7 +32,7 @@ const classes = {
     height: "78vh",
     margin: "0 auto",
     backgroundColor: "#ECECEC",
-    marginLeft: 5,
+    marginLeft: 0,
   },
   columnHead: {
     textAlign: "center",
@@ -170,8 +170,12 @@ class Activities extends Component {
 
   handleDeleteTask = (e, id) => {
     let { tasks } = this.state;
-    tasks = tasks.filter((task) => task._id !== id);
-    this.setState({ tasks });
+    /*tasks = tasks.filter((task) => task._id !== id);
+    this.setState({ tasks });*/
+    var data = {}
+    data.id=id;
+    TaskServices.deleteTask(JSON.parse(localStorage.getItem("project")).project.id,data)
+    window.location.reload(false)
   };
 
   handleClose = () => this.setState({ show: false });
@@ -299,10 +303,10 @@ class Activities extends Component {
         <section style={classes.board}>
           {channels.map((channel) => (
             <ActivityColumn status={channel}>
-              <div className="card md-2 " style={classes.column}>
+              <div className="card" style={classes.column}>
                 <div className="card-header bg-dark" style={classes.columnHead}>
                   {channel.name}
-                  <span onClick={this.handleShowTask} className = "float-right" style = {{ cursor : 'pointer'}}>
+                  <span onClick={this.handleShowTask} className = "float-end" style = {{ cursor : 'pointer'}}>
                   <Icon.PlusCircle color="white" size={24} />
                   </span>
                   

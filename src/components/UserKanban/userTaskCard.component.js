@@ -7,7 +7,7 @@ export default class UserTaskCard extends Component {
   render() {
     return (
       <div
-        className="card pt-1 mb-2"
+        className="card"
         style={{
           marginTop: 3,
           marginLeft: 2,
@@ -18,8 +18,8 @@ export default class UserTaskCard extends Component {
         onDoubleClick={this.props.onDblClick}
       >
         <div className="px-2 pt-2">
-          <h3 className="name">
-            {this.props.item.namr}
+          <h3 className="card-header">
+            {this.props.item.name}
             
           </h3>
         </div>

@@ -43,8 +43,9 @@ class App extends Component {
       <div>
         <nav className="navbar navbar-expand navbar-dark bg-dark">
           <Link to={"/"} className="navbar-brand">
-            bezKoder
+            Teams And Project
           </Link>
+          
           <div className="navbar-nav mr-auto">
             <li className="nav-item">
               <Link to={"/home"} className="nav-link">
@@ -56,7 +57,7 @@ class App extends Component {
           </div>
 
           {currentUser ? (
-            <div className="navbar-nav ml-auto">
+            <div className="navbar-nav ml-auto float-end">
               <li className="nav-item">
                 <Link to={"/home"} className="nav-link">
                   {currentUser.username}
@@ -83,6 +84,7 @@ class App extends Component {
               </li>
             </div>
           )}
+          
         </nav>
 
         <div className="" style={{ width : '100%'}}>

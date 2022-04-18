@@ -114,7 +114,7 @@ const tasks = [
   
   let channels = ["Init", "Dev", "Test", "Review", "Production"];
   
-  let status = ["todo", "doing", "done"];
+  let status = ["to do", "doing", "done"];
   
   let users = [
     { _id: 1, name: "toto bar" },

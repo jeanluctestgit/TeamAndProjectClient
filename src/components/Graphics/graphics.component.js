@@ -49,7 +49,7 @@ export default class Graphics extends Component {
 
       TaskServices.getAllTasks(JSON.parse(localStorage.getItem("project")).project.id).then(
         response => {
-          alert(JSON.stringify(response.data))   
+          
           this.setState({ tasks: response.data });
 
          
@@ -92,7 +92,7 @@ export default class Graphics extends Component {
               {
                 label: "nb tasks todo",
                 data: channels.map((channel) => {
-                  let arr = tasks.filter(item => item.status === 'todo')
+                  let arr = tasks.filter(item => item.status === 'to do')
                   return countOccurrencesPerCategory(arr, channel.name);
                 }),
                 backgroundColor: '#D6E9C6'
@@ -138,7 +138,7 @@ export default class Graphics extends Component {
             labels: status,
             datasets: [{
               data: [
-                     this.state.tasks.filter(item => item.status === 'todo').length,
+                     this.state.tasks.filter(item => item.status === 'to do').length,
                      this.state.tasks.filter(item => item.status === 'doing').length,
                      this.state.tasks.filter(item => item.status === 'done').length
               ],
@@ -178,7 +178,7 @@ export default class Graphics extends Component {
               {
                 label: "nb tasks todo",
                 data: users.map((user) => {
-                  let arr = tasks.filter(item => item.status === 'todo')
+                  let arr = tasks.filter(item => item.status === 'to do')
                   return countOccurrencesPerUser(arr, user.username);
                 }),
                 backgroundColor: '#D6E9C6'

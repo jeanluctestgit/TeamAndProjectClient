@@ -26,18 +26,14 @@ class MemberSpace extends Component {
     console.log("space for :", JSON.stringify(this.props.location?.projectprops));
     return (
       <div>
-        <pre>
-          {
-            JSON.stringify(this.props.location?.projectprops)
-          }
-        </pre>
+        
         <DataContext.Provider value = {this.state}>
         <BrowserRouter>
           <div className = "justify-content-left" style = {{zIndex : 0}} >
             <Row>
               <Col   >
               
-              <Nav className="navbar navbar-expand navbar-dark bg-dark d-none d-md-block sidebar" style = {{position:'absolute', width : 250 ,marginLeft:-20, marginTop : -20 , zIndex : 0}}>
+              <Nav className="navbar navbar-expand navbar-dark bg-dark d-none d-md-block sidebar" style = {{position:'absolute', width : 200 , height:'100%' ,marginLeft:-20, marginTop : -5 , zIndex : 0}}>
                   <Nav.Item style= {{textAlign : 'center' , marginBottom : 0}}>
                     
                     <NavLink to={"/member_space/activities"} activeClassName = "active" className="nav-link nav-link--style">
@@ -62,19 +58,7 @@ class MemberSpace extends Component {
                      <div> Calendar</div>
                     </NavLink>
                   </Nav.Item>
-                  <Nav.Item style= {{textAlign : 'center', marginBottom : 0}}>
                   
-                  <NavLink to={"/member_space/ged"} activeClassName = "active" className="nav-link nav-link--style">
-                  <Icon.FileArrowDown color="white" size={24} />
-                    <div>Documents</div>
-                    </NavLink>
-                  </Nav.Item>
-                  <Nav.Item style= {{textAlign : 'center'}}>
-                  <NavLink to={"/member_space/tchat"} activeClassName = "active" className="nav-link nav-link--style">
-                  <Icon.ChatDots color="white" size={24} />
-                      <div>Tchat</div>
-                    </NavLink>
-                  </Nav.Item>
                   <Nav.Item style= {{textAlign : 'center'}}>
                   
                   <NavLink to={"/member_space/graphics"} activeClassName = "active" className="nav-link nav-link--style">

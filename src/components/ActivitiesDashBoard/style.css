@@ -4,3 +4,9 @@
     width: 40% !important;
     max-width: none;
 }
+
+.name
+{
+    background-color: rgb(196, 154, 123);
+    width: 100%;
+}

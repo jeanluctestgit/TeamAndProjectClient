@@ -1,18 +1,17 @@
 .active{
-    border-bottom: 3px solid #29b6f6;
+    border-bottom: 3px solid #f7f9f9;
   transition: all .3s ease-in-out;
-  color: white;
-  background-color: #666;
-  box-shadow: #333 inset 1px 1px 1px 1px;
+  color: rgb(16, 15, 15);
+  background-color: rgb(254, 251, 251);
+  box-shadow: rgb(255, 255, 255) inset 1px 1px 1px 1px;
   font-size: 1.2em;
   transform: translateX(15px);
-  border-top-left-radius: 20px ;
-  border-bottom-left-radius: 20px ;
+  
 }
 
 .nav-link--style{
-    border-bottom: 3px solid #29b6;
-    border-bottom-left-radius: 20px ;
+    border-bottom: 0px solid rgb(253, 255, 255);
+    
     transform: translateX(15px);
 }
 
