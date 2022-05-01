@@ -155,12 +155,12 @@ export default function Project(props) {
       let ProjectData = new FormData(e.target);
       let project_id = ProjectData.get('project_id');
       let project_name = ProjectData.get('project_name');
-      alert(project_name);
+      
       let DateStart = ProjectData.get('DateStart');
       let DateEnd = ProjectData.get('DateEnd');
       let project_description = ProjectData.get('project_description');
       let project_collabs = Collaborators;
-      alert(Collaborators);
+     
       let collabs = [];
       /*project_collabs.forEach(element => {
         let t = pUsers.filter(u => u.username === element);
@@ -170,7 +170,7 @@ export default function Project(props) {
       
       /*let project_author = (pUsers.filter(u => u.username === props.currentUser.username))[0].id;
       alert(project_author)*/
-      alert(JSON.parse(props['currentUser']))
+      
       let data = {}
       if(UpdateData)
        data.id = project_id;
@@ -183,7 +183,7 @@ export default function Project(props) {
       data.collaborators = Collaborators;
       if(UpdateData)
       {
-        alert('update')
+       
        //mutate2.mutate(data);
        ProjectServices.updateProject(data)
        
@@ -267,6 +267,7 @@ export default function Project(props) {
                   onChange={handleSelectCollaborator}
                   
                 >
+                  <option selected>Select User</option>
                   {pUsers.map((u, index) => {
                     return <option key={index}>{u.username}</option>;
                   })}
@@ -317,9 +318,14 @@ export default function Project(props) {
             </tr>
           </thead>
           <tbody>
-            {Projects
+            {
+            
+            Projects
               .filter(
-                (p) => (p.createdBy === JSON.parse(props.currentUser).username)
+                (p) => {
+                  
+                  //p.createdBy === JSON.parse(props.currentUser).username || 
+                  return (p.createdBy === JSON.parse(props.currentUser).username || p.collaborators.includes(JSON.parse(props.currentUser).username))}
               )
               .map((p, index) => {
                 return (

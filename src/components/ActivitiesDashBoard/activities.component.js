@@ -178,6 +178,16 @@ class Activities extends Component {
     window.location.reload(false)
   };
 
+  handleDeleteChannel = (e, id) => {
+    let { tasks } = this.state;
+    /*tasks = tasks.filter((task) => task._id !== id);
+    this.setState({ tasks });*/
+    var data = {}
+    data.id=id;
+    ChannelServices.deleteChannel(JSON.parse(localStorage.getItem("project")).project.id,data)
+    window.location.reload(false)
+  };
+
   handleClose = () => this.setState({ show: false });
   handleShow = () => this.setState({ show: true });
   handleSaveChannel = (event) => {
@@ -306,9 +316,15 @@ class Activities extends Component {
               <div className="card" style={classes.column}>
                 <div className="card-header bg-dark" style={classes.columnHead}>
                   {channel.name}
+                  <span onClick={(e) =>
+                              this.handleDeleteChannel(e, channel.id)
+                            } className = "float-end" style = {{ cursor : 'pointer'}}>
+                  <Icon.Trash color="white" size={24} />
+                  </span>
                   <span onClick={this.handleShowTask} className = "float-end" style = {{ cursor : 'pointer'}}>
                   <Icon.PlusCircle color="white" size={24} />
                   </span>
+                  
                   
                 </div>
                 <div style = {{ height : "77vh"}}>
@@ -524,7 +540,7 @@ class Activities extends Component {
 
           <Modal show={show} onHide={this.handleClose}>
             <Modal.Header closeButton>
-              <Modal.Title>Modal heading</Modal.Title>
+              <Modal.Title>ADD CHANNEL</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <Form onSubmit={this.handleSaveChannel}>
