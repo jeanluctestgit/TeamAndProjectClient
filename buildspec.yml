@@ -4,6 +4,7 @@ phases:
   pre_build:
     commands:
       - npm install
+      - npm install chart.js
   build:
     commands:
       - npm run build
